@@ -44,6 +44,15 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NewNumber"",
+                    ""type"": ""Button"",
+                    ""id"": ""de43abe3-090e-4bef-9349-76a572a82786"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -90,6 +99,17 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
                     ""action"": ""Previous"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f74f140d-e66f-459c-bedd-716022e39341"",
+                    ""path"": ""<XRController>/{TriggerButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NewNumber"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -100,6 +120,7 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Next = m_Default.FindAction("Next", throwIfNotFound: true);
         m_Default_Previous = m_Default.FindAction("Previous", throwIfNotFound: true);
+        m_Default_NewNumber = m_Default.FindAction("NewNumber", throwIfNotFound: true);
     }
 
     ~@Toggler()
@@ -168,12 +189,14 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
     private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
     private readonly InputAction m_Default_Next;
     private readonly InputAction m_Default_Previous;
+    private readonly InputAction m_Default_NewNumber;
     public struct DefaultActions
     {
         private @Toggler m_Wrapper;
         public DefaultActions(@Toggler wrapper) { m_Wrapper = wrapper; }
         public InputAction @Next => m_Wrapper.m_Default_Next;
         public InputAction @Previous => m_Wrapper.m_Default_Previous;
+        public InputAction @NewNumber => m_Wrapper.m_Default_NewNumber;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +212,9 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
             @Previous.started += instance.OnPrevious;
             @Previous.performed += instance.OnPrevious;
             @Previous.canceled += instance.OnPrevious;
+            @NewNumber.started += instance.OnNewNumber;
+            @NewNumber.performed += instance.OnNewNumber;
+            @NewNumber.canceled += instance.OnNewNumber;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -199,6 +225,9 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
             @Previous.started -= instance.OnPrevious;
             @Previous.performed -= instance.OnPrevious;
             @Previous.canceled -= instance.OnPrevious;
+            @NewNumber.started -= instance.OnNewNumber;
+            @NewNumber.performed -= instance.OnNewNumber;
+            @NewNumber.canceled -= instance.OnNewNumber;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -220,5 +249,6 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
     {
         void OnNext(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
+        void OnNewNumber(InputAction.CallbackContext context);
     }
 }
