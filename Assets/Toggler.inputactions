@@ -6,7 +6,7 @@
             "id": "757c5584-c2c2-4fb2-9b87-63ef0483b57a",
             "actions": [
                 {
-                    "name": "Next",
+                    "name": "LowerRes",
                     "type": "Button",
                     "id": "c17ea932-445d-47c4-a161-d71017f9b9de",
                     "expectedControlType": "",
@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Previous",
+                    "name": "UpRes",
                     "type": "Button",
                     "id": "acadc682-54c3-4dd9-88bb-b497d269d969",
                     "expectedControlType": "",
@@ -41,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Next",
+                    "action": "LowerRes",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -52,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Next",
+                    "action": "LowerRes",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -63,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Previous",
+                    "action": "UpRes",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -74,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Previous",
+                    "action": "UpRes",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

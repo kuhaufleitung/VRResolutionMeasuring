@@ -730,6 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 860799934}
+  stepSize: 0.001
 --- !u!4 &1574129796
 Transform:
   m_ObjectHideFlags: 0

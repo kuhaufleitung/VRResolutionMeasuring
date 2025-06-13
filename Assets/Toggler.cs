@@ -28,7 +28,7 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
             ""id"": ""757c5584-c2c2-4fb2-9b87-63ef0483b57a"",
             ""actions"": [
                 {
-                    ""name"": ""Next"",
+                    ""name"": ""LowerRes"",
                     ""type"": ""Button"",
                     ""id"": ""c17ea932-445d-47c4-a161-d71017f9b9de"",
                     ""expectedControlType"": """",
@@ -37,7 +37,7 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Previous"",
+                    ""name"": ""UpRes"",
                     ""type"": ""Button"",
                     ""id"": ""acadc682-54c3-4dd9-88bb-b497d269d969"",
                     ""expectedControlType"": """",
@@ -63,7 +63,7 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Next"",
+                    ""action"": ""LowerRes"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -74,7 +74,7 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Next"",
+                    ""action"": ""LowerRes"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -85,7 +85,7 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous"",
+                    ""action"": ""UpRes"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -96,7 +96,7 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous"",
+                    ""action"": ""UpRes"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -118,8 +118,8 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
 }");
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
-        m_Default_Next = m_Default.FindAction("Next", throwIfNotFound: true);
-        m_Default_Previous = m_Default.FindAction("Previous", throwIfNotFound: true);
+        m_Default_LowerRes = m_Default.FindAction("LowerRes", throwIfNotFound: true);
+        m_Default_UpRes = m_Default.FindAction("UpRes", throwIfNotFound: true);
         m_Default_NewNumber = m_Default.FindAction("NewNumber", throwIfNotFound: true);
     }
 
@@ -187,15 +187,15 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
     // Default
     private readonly InputActionMap m_Default;
     private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
-    private readonly InputAction m_Default_Next;
-    private readonly InputAction m_Default_Previous;
+    private readonly InputAction m_Default_LowerRes;
+    private readonly InputAction m_Default_UpRes;
     private readonly InputAction m_Default_NewNumber;
     public struct DefaultActions
     {
         private @Toggler m_Wrapper;
         public DefaultActions(@Toggler wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Next => m_Wrapper.m_Default_Next;
-        public InputAction @Previous => m_Wrapper.m_Default_Previous;
+        public InputAction @LowerRes => m_Wrapper.m_Default_LowerRes;
+        public InputAction @UpRes => m_Wrapper.m_Default_UpRes;
         public InputAction @NewNumber => m_Wrapper.m_Default_NewNumber;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
@@ -206,12 +206,12 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_DefaultActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_DefaultActionsCallbackInterfaces.Add(instance);
-            @Next.started += instance.OnNext;
-            @Next.performed += instance.OnNext;
-            @Next.canceled += instance.OnNext;
-            @Previous.started += instance.OnPrevious;
-            @Previous.performed += instance.OnPrevious;
-            @Previous.canceled += instance.OnPrevious;
+            @LowerRes.started += instance.OnLowerRes;
+            @LowerRes.performed += instance.OnLowerRes;
+            @LowerRes.canceled += instance.OnLowerRes;
+            @UpRes.started += instance.OnUpRes;
+            @UpRes.performed += instance.OnUpRes;
+            @UpRes.canceled += instance.OnUpRes;
             @NewNumber.started += instance.OnNewNumber;
             @NewNumber.performed += instance.OnNewNumber;
             @NewNumber.canceled += instance.OnNewNumber;
@@ -219,12 +219,12 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IDefaultActions instance)
         {
-            @Next.started -= instance.OnNext;
-            @Next.performed -= instance.OnNext;
-            @Next.canceled -= instance.OnNext;
-            @Previous.started -= instance.OnPrevious;
-            @Previous.performed -= instance.OnPrevious;
-            @Previous.canceled -= instance.OnPrevious;
+            @LowerRes.started -= instance.OnLowerRes;
+            @LowerRes.performed -= instance.OnLowerRes;
+            @LowerRes.canceled -= instance.OnLowerRes;
+            @UpRes.started -= instance.OnUpRes;
+            @UpRes.performed -= instance.OnUpRes;
+            @UpRes.canceled -= instance.OnUpRes;
             @NewNumber.started -= instance.OnNewNumber;
             @NewNumber.performed -= instance.OnNewNumber;
             @NewNumber.canceled -= instance.OnNewNumber;
@@ -247,8 +247,8 @@ public partial class @Toggler: IInputActionCollection2, IDisposable
     public DefaultActions @Default => new DefaultActions(this);
     public interface IDefaultActions
     {
-        void OnNext(InputAction.CallbackContext context);
-        void OnPrevious(InputAction.CallbackContext context);
+        void OnLowerRes(InputAction.CallbackContext context);
+        void OnUpRes(InputAction.CallbackContext context);
         void OnNewNumber(InputAction.CallbackContext context);
     }
 }

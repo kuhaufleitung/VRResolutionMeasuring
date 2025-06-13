@@ -13,19 +13,24 @@ public class ResolutionSwitch : MonoBehaviour
     [SerializeField]
     private TextMeshPro text;
 
-    private readonly IReadOnlyList<float> _resolutions =
-        new List<float>
+    [SerializeField] private float stepSize;
+    private float _currentRes = 1.0f;
+
+    private void FixedUpdate()
+    {
+        if (_inputActions.Default.UpRes.IsPressed())
         {
-            1.0f,
-            0.8f,
-            0.6f,
-            0.4f,
-            0.2f
-        }.AsReadOnly(); // Prevents modifications
+            CalcClampedResScale(stepSize);
+            XRSettings.eyeTextureResolutionScale = _currentRes;
+            Debug.Log("Resolution scale now: " + _currentRes);
+        } else if (_inputActions.Default.LowerRes.IsPressed())
+        {
+            CalcClampedResScale(-stepSize);
+            XRSettings.eyeTextureResolutionScale = _currentRes;
+            Debug.Log("Resolution scale now: " + _currentRes);
+        }
+    }
 
-    private int _currentIndex = 0;
-
-    // Start is called before the first frame update
     void Start()
     {
         var rngNumber = Random.Range(10.0f, 99.0f);
@@ -34,37 +39,30 @@ public class ResolutionSwitch : MonoBehaviour
         _inputActions = new Toggler();
         _inputActions.Enable();
 
-        _inputActions.Default.Next.started += NextRes;
-        _inputActions.Default.Previous.started += PrevRes;
         _inputActions.Default.NewNumber.started += SetNewNumber;
     }
     
-    private void NextRes(InputAction.CallbackContext ctx)
-    {
-        _currentIndex++;
-        if (_currentIndex == _resolutions.Count)
-        {
-            _currentIndex = _resolutions.Count - 1;
-        }
-        XRSettings.eyeTextureResolutionScale = _resolutions[_currentIndex];
-        Debug.Log("Resolution now: " + _resolutions[_currentIndex]);
-    }
-
-    private void PrevRes(InputAction.CallbackContext ctx)
-    {
-        _currentIndex--;
-        if (_currentIndex == -1)
-        {
-            _currentIndex = 0;
-        }
-        XRSettings.eyeTextureResolutionScale = _resolutions[_currentIndex];
-        Debug.Log("Resolution now: " + _resolutions[_currentIndex]);
-    }
-
     private void SetNewNumber(InputAction.CallbackContext ctx)
     {
         var rngNumber = Random.Range(10.0f, 99.0f);
         var nbr = (int)rngNumber;
         text.SetText(nbr.ToString());
+    }
+
+    private void CalcClampedResScale(float scaleStep)
+    {
+        _currentRes += scaleStep;
+        if (_currentRes < 0.01f)
+        {
+            _currentRes = 0.01f;
+        }
+        else if (_currentRes > 1.0f)
+        {
+            _currentRes = 1.0f;
+        }
+        else
+        {
+            _currentRes += scaleStep;
+        }
     }
 }
