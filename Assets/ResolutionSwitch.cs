@@ -33,7 +33,7 @@ public class ResolutionSwitch : MonoBehaviour
 
     void Start()
     {
-        var rngNumber = Random.Range(10.0f, 99.0f);
+        var rngNumber = Random.Range(1000000.0f, 9999999.0f);
         var nbr = (int)rngNumber;
         text.SetText(nbr.ToString());
         _inputActions = new Toggler();
@@ -44,7 +44,7 @@ public class ResolutionSwitch : MonoBehaviour
     
     private void SetNewNumber(InputAction.CallbackContext ctx)
     {
-        var rngNumber = Random.Range(10.0f, 99.0f);
+        var rngNumber = Random.Range(1000000.0f, 9999999.0f);
         var nbr = (int)rngNumber;
         text.SetText(nbr.ToString());
     }

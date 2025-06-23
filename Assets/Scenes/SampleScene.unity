@@ -1351,7 +1351,7 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: 75a03b64-54b4-4854-a23d-55e70ea7fb93
-        m_Path: <XRController>{RightHand}/devicePosition
+        m_Path: <XRController>{RightHand}/pointerPosition
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -1371,7 +1371,7 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: c270d932-5b06-4f61-abfe-53837d56c97b
-        m_Path: <XRController>{RightHand}/deviceRotation
+        m_Path: <XRController>{RightHand}/pointerRotation
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -2042,7 +2042,7 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: bffcde00-f385-41f2-ac19-a697eb0332ab
-        m_Path: <XRController>{LeftHand}/devicePosition
+        m_Path: <XRController>{LeftHand}/pointerPosition
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -2062,7 +2062,7 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: 75716297-8b70-449a-a2fd-7fe50e6c4f6b
-        m_Path: <XRController>{LeftHand}/deviceRotation
+        m_Path: <XRController>{LeftHand}/pointerRotation
         m_Interactions: 
         m_Processors: 
         m_Groups: 
